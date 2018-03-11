@@ -21,3 +21,6 @@ Application logs are sent to ./log/gitviewer.log
 
 ## TODO
 * investigate why dropwizard config file is not affecting the log level when called with command
+* make the Git CLI CLient platform agnostic (currently works only with linux)
+* support for pipes in commit messages (risk of losing part of the title line)
+* support for git branches, for now only getting the default branch

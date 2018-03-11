@@ -2,23 +2,28 @@ package cviewer.data;
 
 import java.util.Date;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.joda.time.DateTime;
+
 /**
  * This class represent a git commit
  *
  */
 public class GitCommit {
-	
+
 	private String sha;
-	
-	private Date authorDate;
-	
+
+	private DateTime authorDate;
+
 	private String author;
-	
+
+	private String authorEmail;
+
 	private String titleLine;
-	
+
 	private String branch;
-	
-	private String repository;
+
+	private String repositoryUrl;
 
 	public String getSha() {
 		return sha;
@@ -28,11 +33,11 @@ public class GitCommit {
 		this.sha = sha;
 	}
 
-	public Date getAuthorDate() {
+	public DateTime getAuthorDate() {
 		return authorDate;
 	}
 
-	public void setAuthorDate(Date authorDate) {
+	public void setAuthorDate(DateTime authorDate) {
 		this.authorDate = authorDate;
 	}
 
@@ -60,14 +65,34 @@ public class GitCommit {
 		this.branch = branch;
 	}
 
-	public String getRepository() {
-		return repository;
+	public String getAuthorEmail() {
+		return authorEmail;
 	}
 
-	public void setRepository(String repository) {
-		this.repository = repository;
+	public void setAuthorEmail(String authorEmail) {
+		this.authorEmail = authorEmail;
 	}
-	
-	
+
+	public String getRepositoryUrl() {
+		return repositoryUrl;
+	}
+
+	public void setRepositoryUrl(String repositoryUrl) {
+		this.repositoryUrl = repositoryUrl;
+	}
+
+	public String toString() {
+		final char separator = '|';
+		return new StringBuilder().append(sha)
+				.append(separator)
+				.append(author)
+				.append(separator)
+				.append(authorEmail)
+				.append(separator)
+				.append(authorDate)
+				.append(separator)
+				.append(titleLine)
+				.toString();
+	}
 
 }

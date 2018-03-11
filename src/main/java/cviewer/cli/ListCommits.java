@@ -1,6 +1,9 @@
 package cviewer.cli;
 
+import java.util.List;
+
 import cviewer.CviewerConfiguration;
+import cviewer.data.GitCommit;
 import cviewer.git.GitCliClient;
 import cviewer.git.GitClientException;
 import io.dropwizard.cli.ConfiguredCommand;
@@ -37,7 +40,12 @@ public class ListCommits extends ConfiguredCommand<CviewerConfiguration> {
 		{
 			GitCliClient gitCliClient = new GitCliClient();
 			
-			gitCliClient.getCommits(namespace.getString("url"), 100);
+			List<GitCommit> commits = gitCliClient.getCommits(namespace.getString("url"), 100);
+			
+			for (GitCommit commit : commits)
+			{
+				System.out.println(commit);
+			}
 		}
 		// If git client returned an error, let's inform the user
 		catch (GitClientException e)
