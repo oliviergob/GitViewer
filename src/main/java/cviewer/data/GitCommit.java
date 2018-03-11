@@ -1,8 +1,5 @@
 package cviewer.data;
 
-import java.util.Date;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joda.time.DateTime;
 
 /**

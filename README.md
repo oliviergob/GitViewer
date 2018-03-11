@@ -1,10 +1,18 @@
 ## prerequisites
 * Linux environment
 * [Java 8 JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+* [Docker](https://docs.docker.com/install/)
+* [Docker Compose](https://docs.docker.com/compose/install)
+
 
 ## Building the project
 ```
 ./gradlew oneJar
+```
+
+## Starting the database
+```
+docker-compose up
 ```
 
 ## Running the CLI
@@ -16,6 +24,7 @@ Although you will have to set up your ssh keys for the ssh url to function
  
 ## Logging
 Application logs are sent to ./log/gitviewer.log
+
 
 
 
