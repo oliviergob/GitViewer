@@ -1,0 +1,3 @@
+#!/bin/bash
+
+java -Done-jar.silent=true -jar ./build/libs/GitViewer-standalone.jar list -u $1 ./config/cviewer_config.yaml 

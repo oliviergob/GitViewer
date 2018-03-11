@@ -1,0 +1,9 @@
+appName: Git Commit Viewer
+maxCommitsPerCall: 100
+
+# Logging settings.
+logging:
+  level: ERROR
+  loggers:
+    cviewer: INFO
+    

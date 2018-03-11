@@ -1,0 +1,41 @@
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'gradle-one-jar'
+
+repositories {
+	mavenCentral()
+}
+    
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.github.rholder:gradle-one-jar:1.0.3'
+    }
+}
+
+project.ext {       
+    configPath = "$rootProject.projectDir/config/"
+}
+
+dependencies {
+    compile (
+        'io.dropwizard:dropwizard-core:1.2.4',
+        'commons-io:commons-io:2.6' 
+    )
+    testCompile 'junit:junit:4.12'
+}
+
+mainClassName = "cviewer.CviewerApplication"    
+
+
+// Configure the oneJar task
+task oneJar(type: OneJar) {
+    mainClass = mainClassName
+}
+
+artifacts {
+    oneJar
+}
