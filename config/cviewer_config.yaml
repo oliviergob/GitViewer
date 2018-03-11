@@ -3,7 +3,11 @@ maxCommitsPerCall: 100
 
 # Logging settings.
 logging:
-  level: ERROR
-  loggers:
-    cviewer: INFO
-    
+  level: DEBUG
+  appenders:
+    - type: file
+      currentLogFilename: ./log/gitviewer.log
+      threshold: DEBUG
+      archivedLogFilenamePattern: ./log/gitviewer-%d.log
+      archivedFileCount: 5
+      timeZone: UTC    

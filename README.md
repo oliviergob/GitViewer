@@ -14,6 +14,10 @@
 The URL can be an http or ssh url
 Although you will have to set up your ssh keys for the ssh url to function
  
+## Logging
+Application logs are sent to ./log/gitviewer.log
+
+
 
 ## TODO
 * investigate why dropwizard config file is not affecting the log level when called with command
