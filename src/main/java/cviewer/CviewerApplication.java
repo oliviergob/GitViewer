@@ -3,8 +3,13 @@ package cviewer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.scottescue.dropwizard.entitymanager.EntityManagerBundle;
+
 import cviewer.cli.ListCommits;
+import cviewer.dao.repository.GitRepository;
+import cviewer.data.GitCommit;
 import io.dropwizard.Application;
+import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
@@ -17,6 +22,14 @@ public class CviewerApplication extends Application<CviewerConfiguration> {
 	}
 
 	private String applicationName;
+	
+	private final EntityManagerBundle<CviewerConfiguration> entityManagerBundle = 
+	        new EntityManagerBundle<CviewerConfiguration>(GitRepository.class, GitCommit.class) {
+	    @Override
+	    public DataSourceFactory getDataSourceFactory(CviewerConfiguration configuration) {
+	        return configuration.getDataSourceFactory();
+	    }
+	};
 
 	@Override
 	public String getName() {
@@ -25,7 +38,9 @@ public class CviewerApplication extends Application<CviewerConfiguration> {
 
 	@Override
 	public void initialize(Bootstrap<CviewerConfiguration> bootstrap) {
-		bootstrap.addCommand(new ListCommits());
+		bootstrap.addBundle(entityManagerBundle);
+		bootstrap.addCommand(new ListCommits(this, entityManagerBundle));
+		
 
 	}
 

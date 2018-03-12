@@ -1,0 +1,44 @@
+# Docker Compose file starting the following containers:
+# - a postgresql database
+#    Port:      5432
+#    User:      postgres
+#    Paswword:  changeme
+# - pgadmin4
+#    Port:      5050
+#    User:      test@domain.com
+#    Paswword:  changeme
+
+version: "3"
+services:
+  db:
+    image: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: changeme
+      PGDATA: /data/postgres
+    ports:
+      - "5432:5432"
+    volumes:
+       - /data/postgres:/data/postgres
+    networks:
+      - postgres
+      
+  pgadmin:
+    links:
+      - db:postgres
+    image: fenglc/pgadmin4
+    volumes:
+       - /data/pgadmin:/root/.pgadmin
+    environment:
+      MAIL_USERNAME: test@domain.com
+      MAIL_PASSWORD: changeme
+    ports:
+      - "5050:5050"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge

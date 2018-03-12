@@ -24,7 +24,8 @@ dependencies {
     compile (
         'io.dropwizard:dropwizard-core:1.2.4',
         'commons-io:commons-io:2.6',
-        'org.apache.commons:commons-lang3:3.7'
+        'com.scottescue:dropwizard-entitymanager:1.0.0-1',
+        'org.postgresql:postgresql:42.2.1'
     )
     testCompile 'junit:junit:4.12'
 }

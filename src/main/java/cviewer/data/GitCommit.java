@@ -1,25 +1,40 @@
 package cviewer.data;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.joda.time.DateTime;
 
 /**
  * This class represent a git commit
  *
  */
+@Entity
+@Table(name = "GIT_COMMIT")
 public class GitCommit {
 
+	@Column(name = "SHA")
+	@Id
 	private String sha;
 
+	@Column(name = "AUTHOR_DATE")
 	private DateTime authorDate;
 
+	@Column(name = "AUTHOR")
 	private String author;
 
+	@Column(name = "AUTHOR_EMAIL")
 	private String authorEmail;
 
+	@Column(name = "TITLE_LINE")
 	private String titleLine;
 
+	@Column(name = "BRANCH")
 	private String branch;
 
+	@Column(name = "REPOSITORY_URL")
 	private String repositoryUrl;
 
 	public String getSha() {

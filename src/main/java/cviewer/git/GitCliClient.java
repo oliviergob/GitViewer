@@ -40,12 +40,12 @@ public class GitCliClient implements GitClient {
 
 			// using the Runtime exec method:
 			Process process = Runtime.getRuntime().exec(command, null, workDirectory);
+			int exitVal = process.waitFor();
 
 			BufferedReader stdInput = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
 			BufferedReader stdError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
-			int exitVal = process.waitFor();
 
 			// read the output from the command
 			while ((s = stdInput.readLine()) != null) {
@@ -75,7 +75,7 @@ public class GitCliClient implements GitClient {
 	 * @param commitString
 	 * @return a GitCommit object or null if the line could not be parsed
 	 */
-	private GitCommit parseCommits(String commitString)
+	private GitCommit parseCommits(String commitString, String repositoryUrl)
 	{
 		
 		GitCommit commit = new GitCommit();
@@ -108,6 +108,7 @@ public class GitCliClient implements GitClient {
 		commit.setTitleLine(fields[4]);
 		// TODO - support for branches
 		commit.setBranch(null);
+		commit.setRepositoryUrl(repositoryUrl);
 		
 		return commit;
 	}
@@ -142,7 +143,7 @@ public class GitCliClient implements GitClient {
 			for (String commitString : commitStringList)
 			{
 				// Parsing the commit
-				GitCommit commit = parseCommits(commitString);
+				GitCommit commit = parseCommits(commitString, url);
 				// If the commit could be parsed
 				if (commit != null)
 					commits.add(commit);
